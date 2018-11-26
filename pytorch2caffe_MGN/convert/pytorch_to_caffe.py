@@ -121,7 +121,7 @@ def _split(raw,tensor, split_size, dim=0):
     layer=caffe_net.Layer_param(name=layer_name, type='Slice',
                                 bottom=[log.blobs(tensor)], top=top_blobs)
     slice_num=int(np.floor(tensor.size()[dim]/split_size))
-    slice_param=caffe_net.pb.SliceParameter(axis=dim) # mgn中为等分，为了darknet中源码实现方便，这里将slice_point参数隐藏了
+    slice_param=caffe_net.pb.SliceParameter(axis=dim)
     # slice_param=caffe_net.pb.SliceParameter(axis=dim,slice_point=[split_size*i for i in range(1,slice_num)])
     layer.param.slice_param.CopyFrom(slice_param)
     log.cnet.add_layer(layer)
