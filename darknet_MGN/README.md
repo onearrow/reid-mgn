@@ -1,4 +1,4 @@
-# Darknet #
+# darknet_MGN #
 
 1、2018.11.19从DarkNet官方GitHub上copy过来的
 
