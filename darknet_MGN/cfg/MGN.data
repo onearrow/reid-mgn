@@ -1,0 +1,6 @@
+classes= 1
+train  = data/MGN_train.txt
+valid  = data/MGN_test.txt
+names = data/MGN.names
+backup = backup
+
