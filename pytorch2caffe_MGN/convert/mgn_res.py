@@ -148,3 +148,5 @@ class MGN(nn.Module):
         predict = torch.cat([fg_p1, fg_p2, fg_p3, f0_p2, f1_p2, f0_p3, f1_p3, f2_p3], dim=1)
         
         return predict
+
+    
