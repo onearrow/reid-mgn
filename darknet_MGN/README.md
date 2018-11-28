@@ -6,4 +6,4 @@
 
 3、修改了maxpool_layer的接口，支持了多尺度kernel size和stride size
 
-4、修改Python调用接口，支持numpy图片输入
+4、修改Python接口调用，支持numpy图片输入，https://blog.csdn.net/lwplwf/article/details/84566954
