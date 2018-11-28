@@ -7,6 +7,10 @@ sys.path.append(os.path.join(os.getcwd(),'python/'))
 from ctypes import *
 import math
 import random
+import numpy as np
+import cv2
+from PIL import Image
+
 
 class IMAGE(Structure):
     _fields_ = [("w", c_int),
@@ -37,13 +41,26 @@ free_image.argtypes = [IMAGE]
 
 
 def MGN(net, image):
-    im = load_image(image, 0, 0)
-    out = predict_image(net, im)
+    # PIL Image
+    image = Image.open(image_path) # RGB
+    image = image.resize((128, 384))
+    image.show()
+    image = np.array(image)
+    r = cv2.split(image)[0]
+    g = cv2.split(image)[1]
+    b = cv2.split(image)[2]
+    image = cv2.merge([b, g, r])
+    # image = image / 255.0 # nparray_to_image内部会处理
+    im = nparray_to_image(image) #  由numpy转换得到IMAGE
 
+    # IMAGE
+    # im = load_image(image_path, 0, 0) # 由路径加载得到IMAGE
+    out = predict_image(net, im)
+    
     res = []
     for i in range(2048):
         res.append(out[i])
-        print(i, out[i])
+    print(res)
     
     free_image(im)
     return res
