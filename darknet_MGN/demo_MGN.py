@@ -18,6 +18,11 @@ class IMAGE(Structure):
                 ("c", c_int),
                 ("data", POINTER(c_float))]
 
+def nparray_to_image(img): 
+    data = img.ctypes.data_as(POINTER(c_ubyte)) 
+    image = ndarray_image(data, img.ctypes.shape, img.ctypes.strides)
+    return image
+
 lib = CDLL("libdarknet.so", RTLD_GLOBAL)
 lib.network_width.argtypes = [c_void_p]
 lib.network_width.restype = c_int
@@ -31,6 +36,10 @@ load_net.restype = c_void_p
 load_image = lib.load_image_color
 load_image.argtypes = [c_char_p, c_int, c_int]
 load_image.restype = IMAGE
+
+ndarray_image = lib.ndarray_to_image 
+ndarray_image.argtypes = [POINTER(c_ubyte), POINTER(c_long), POINTER(c_long)] 
+ndarray_image.restype = IMAGE
 
 predict_image = lib.network_predict_image
 predict_image.argtypes = [c_void_p, IMAGE]
