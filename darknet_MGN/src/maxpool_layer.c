@@ -82,35 +82,28 @@ void resize_maxpool_layer(maxpool_layer *l, int w, int h)
 
 void forward_maxpool_layer(const maxpool_layer l, network net)
 {
-    int b,i,j,k,m,n;
-    int w_offset = -l.pad; // lwp
-    int h_offset = -l.pad; // lwp
-
-    int h = l.out_h;
-    int w = l.out_w;
-    int c = l.c;
-
-    for(b = 0; b < l.batch; ++b){
-        for(k = 0; k < c; ++k){
-            for(i = 0; i < h; ++i){
-                for(j = 0; j < w; ++j){
-                    int out_index = j + w*(i + h*(k + c*b));
+    for(int n = 0; n < l.batch; ++n){
+        for(int c = 0; c < l.c; ++c){
+            for(int i = 0; i < l.out_h; ++i){
+                for(int j = 0; j < l.out_w; ++j){
+                    int pool_index = n*l.c*l.out_h*l.out_w + c*l.out_h*l.out_w + i*l.out_w + j;
                     float max = -FLT_MAX;
-                    int max_i = -1;
-                    for(n = 0; n < l.size_h; ++n){
-                        for(m = 0; m < l.size_w; ++m){
-                            int cur_h = h_offset + i*l.stride_h + n;
-                            int cur_w = w_offset + j*l.stride_w + m;
-                            int index = cur_w + l.w*(cur_h + l.h*(k + b*l.c));
-                            int valid = (cur_h >= 0 && cur_h < l.h &&
-                                         cur_w >= 0 && cur_w < l.w);
+                    int max_index = -1;
+                    for(int h = 0; h < l.size_h; ++h){
+                        for(int w = 0; w < l.size_w; ++w){
+                            int h_offset = i*l.stride_h - l.pad + h;
+                            int w_offset = j*l.stride_w - l.pad + w;
+                            int index = n*l.c*l.h*l.w + c*l.h*l.w + h_offset*l.w + w_offset;
+                            int valid = (h_offset >= 0 && h_offset < l.h && w_offset >= 0 && w_offset < l.w);
                             float val = (valid != 0) ? net.input[index] : -FLT_MAX;
-                            max_i = (val > max) ? index : max_i;
-                            max   = (val > max) ? val   : max;
+                            if(val > max){
+                                max = val;
+                                max_index = index;
+                            }
                         }
                     }
-                    l.output[out_index] = max;
-                    l.indexes[out_index] = max_i;
+                    l.output[pool_index] = max;
+                    l.indexes[pool_index] = max_index;
                 }
             }
         }
