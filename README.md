@@ -10,6 +10,6 @@ Re-ID MGN模型从Pytorch转换到DarkNet分两步进行：
 
 模型文件：
 
-（1）链接: https://pan.baidu.com/s/12Obc8kzCr-t6SSgH845reA 提取码: j1uk
+> 链接: https://pan.baidu.com/s/12Obc8kzCr-t6SSgH845reA 提取码: j1uk
 
-（2）https://github.com/seathiefwang/MGN-pytorch
+> https://github.com/seathiefwang/MGN-pytorch
