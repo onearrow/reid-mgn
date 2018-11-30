@@ -1224,6 +1224,33 @@ void load_convolutional_weights(layer l, FILE *fp)
         }
     }
     fread(l.weights, sizeof(float), num, fp);
+    
+    // 2018.11.28-lwp
+    // weights
+    // FILE *fpWrite = fopen("darknet_weights2.txt", "w");
+    // printf("%d %d\n", l.n, l.c);
+
+    // printf("---%f\n", l.weights[0]);
+    // printf("---%f\n", l.weights[1]);
+    // printf("---%f\n", l.weights[2]);
+    // printf("---%f\n", l.weights[3]);
+    // printf("---%f\n", l.weights[9407]);
+    // printf("---%f\n", l.weights[9408]);
+    // for(int m=0; m<l.n; m++){
+    //     // printf("mmm %d\n", m);
+    //     for(int c=0; c<l.c; c++){
+    //         // printf("ccc %d\n", c);
+    //         for(int sh=0; sh<l.size; sh++){
+    //             for(int sw=0; sw<l.size; sw++){
+    //                 fprintf(fpWrite, "%f ", l.weights[m*l.c*l.size*l.size + c*l.size*l.size + sh*l.size + sw]);
+    //                 // printf("%d \n", m*l.c*l.size*l.size + c*l.size*l.size + sh*l.size + sw);
+    //             }
+    //         }
+    //     }
+    //     fprintf(fpWrite, "\n*********\n");
+    // }
+    // fclose(fpWrite);
+    
     //if(l.c == 3) scal_cpu(num, 1./256, l.weights, 1);
     if (l.flipped) {
         transpose_matrix(l.weights, l.c*l.size*l.size, l.n);
