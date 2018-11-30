@@ -461,9 +461,29 @@ def save_weights(data, weightfile):
     weights[3] = 0      ## net.seen
     weights.tofile(weightfile)
     weights = np.fromfile(weightfile, dtype=np.float32)
-    weights[4:] = data
+    # weights[4:] = data
+    for i in range(wsize):
+        weights[i+4] = data[i]
     weights.tofile(weightfile)
 
+    # lwp-2018.11.29
+    # print(len(data))
+    # print(data[0])
+    # print(data[wsize-1])
+
+    # print(weights[0])
+    # print(weights[1])
+    # print(weights[2])
+    # print(weights[3])
+    # print(len(weights))
+
+    # pf1 = open("okkkkk.txt", 'w')
+    # for i in range(wsize):
+    #     pf1.write('%f ' % data[i])
+    #     if (i+1)%147 == 0:
+    #         pf1.write('\n\n')
+    # pf1.close
+    
 if __name__ == '__main__':
     import sys
     
