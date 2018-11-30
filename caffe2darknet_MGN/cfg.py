@@ -84,22 +84,14 @@ def print_cfg_nicely(blocks):
             out_heights.append(prev_height)
             out_filters.append(prev_filters)
         elif block['type'] == 'maxpool':
-            if block.has_key('size'):
-                kernel_size = int(block['size'])
-                stride = int(block['stride'])
-                pad = int(block['padding'])
-                width = (prev_width + 2*pad - kernel_size)/stride + 1
-                height = (prev_height + 2*pad - kernel_size)/stride + 1
-                print('%5d %-6s       %d x %d / %d   %3d x %3d x%4d   ->   %3d x %3d x%4d' % (ind, 'max', kernel_size, kernel_size, stride, prev_width, prev_height, prev_filters, width, height, filters))
-            else:
-                pad = 0
-                size_w = int(block['size_w'])
-                size_h = int(block['size_h'])
-                stride_w = int(block['stride_w'])
-                stride_h = int(block['stride_h'])
-                width = (prev_width + 2*pad - size_w)/stride_w + 1
-                height = (prev_height + 2*pad - size_h)/stride_h + 1
-                print('%5d %-6s       %d x %d / %d x %d   %3d x %3d x%4d   ->   %3d x %3d x%4d' % (ind, 'max', size_w, size_h, stride_w, stride_h, prev_width, prev_height, prev_filters, width, height, filters))
+            padding = int(block['padding'])
+            size_w = int(block['size_w'])
+            size_h = int(block['size_h'])
+            stride_w = int(block['stride_w'])
+            stride_h = int(block['stride_h'])
+            width = (prev_width + 2*padding - size_w)/stride_w + 1
+            height = (prev_height + 2*padding - size_h)/stride_h + 1
+            print('%5d %-6s       %dx%d / %dx%d   %3d x %3d x%4d   ->   %3d x %3d x%4d' % (ind, 'max', size_w, size_h, stride_w, stride_h, prev_width, prev_height, prev_filters, width, height, filters))
             prev_width = width
             prev_height = height
             prev_filters = filters
