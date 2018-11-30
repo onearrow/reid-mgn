@@ -205,6 +205,35 @@ void forward_network(network *netp)
             fill_cpu(l.outputs * l.batch, 0, l.delta, 1);
         }
         l.forward(l, net);
+	
+	// 2018.11.29-lwp
+        // output
+        // printf("%d\n", i);
+        // if(i == net.n-1){
+        //     FILE *fpWrite = fopen("darknet_conv11+bn-2018.11.30.txt", "w");
+        //     for(int m=0; m<256; m++){
+        //         for(int h=0; h<96; h++){
+        //             for(int w=0; w<32; w++){
+        //                 int index = m*96*32 + h*32 + w;
+        //                 fprintf(fpWrite, "%f ", l.output[index]);                 
+        //             }
+        //             fprintf(fpWrite, "\n\n");
+        //         }
+        //         fprintf(fpWrite, "\n##########\n");
+        //     }
+        // }
+        
+        // if (i == net.n-1){
+        //     FILE *fpWrite = fopen("darknet_output.txt", "w");
+        //     for(int m=0; m<8; m++){
+        //         for(int n=0; n<256; n++){
+        //             int index = m*256 + n;
+        //             fprintf(fpWrite, "%f ", l.output[m*256 + n]);
+        //         }
+        //         fprintf(fpWrite, "\n*********\n");
+        //     }
+        // }
+	    
         net.input = l.output;
         if(l.truth) {
             net.truth = l.output;
