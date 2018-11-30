@@ -53,7 +53,7 @@ def MGN(net, image):
     # PIL Image
     image = Image.open(image_path) # RGB
     image = image.resize((128, 384))
-    image.show()
+    # image.show()
     image = np.array(image)
     r = cv2.split(image)[0]
     g = cv2.split(image)[1]
