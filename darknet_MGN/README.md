@@ -19,4 +19,4 @@
 
 > 2018.11.30
 
-5、修改了maxpool_layer计算方式，和Caffe保持一致
+5、修改了maxpool_layer计算方式，和Caffe保持一致，可参考https://blog.csdn.net/lwplwf/article/details/82418110
