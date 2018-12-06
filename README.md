@@ -1,15 +1,29 @@
-# re-id_mgn
-Re-ID MGN模型从Pytorch转换到DarkNet分两步进行：
+# Re-ID MGN模型
 
-（1）Pytorch->Caffe（模型结构转换、权重转换、验证）
+## 模型转换
+### pytorch2caffe_MGN
+#### Pytorch->Caffe
+模型结构转换 -- 已完成
+模型权重转换 -- 已完成
+结果验证 -- 已完成
 
-（2）Caffe->DarkNet（模型结构转换、权重转换、验证）
+### caffe2darknet_MGN
+#### Caffe->DarkNet
+模型结果转换 -- 已完成
+模型权重转换 -- 已完成
+结果验证 -- 已完成
 
-在caffe2darknet的转换中，slice层由于DarkNet不支持，需要修改DarkNet源码添加新层实现，且需要修改源码让max_pool层支持多尺度kernel size和stride size。
+#### remark
+(1)在caffe2darknet的转换中，slice层由于DarkNet不支持，需要修改DarkNet源码添加新层实现
 
+(2)需要修改源码让max_pool层支持多尺度kernel size和stride size
 
-模型文件：
+(3)修改DarkNet源码，增加了Python借口调用对numpy格式输入的支持
 
-> 链接: https://pan.baidu.com/s/12Obc8kzCr-t6SSgH845reA 提取码: j1uk
+### darknet_MGN
+修改源码之后的DarkNet
 
-> https://github.com/seathiefwang/MGN-pytorch
+## 模型训练
+### MGN_pytorch
+MGN模型的训练，在Pytorch下进行
+
