@@ -31,5 +31,5 @@ MGN模型的训练，在Pytorch下进行
 
 (2)需要修改源码让max_pool层支持多尺度kernel size和stride size
 
-(3)修改DarkNet源码，增加了Python借口调用对numpy格式输入的支持
+(3)修改DarkNet源码，增加了Python接口调用对numpy格式输入的支持
 
