@@ -26,7 +26,7 @@
 MGN模型的训练，在Pytorch下进行
 
 
-## remark
+## Remark
 
 (1)在caffe2darknet的转换中，slice层由于DarkNet不支持，需要修改DarkNet源码添加新层实现
 
