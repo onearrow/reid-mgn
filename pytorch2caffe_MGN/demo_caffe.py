@@ -8,9 +8,7 @@ sys.path.insert(0, caffe_root + 'python')
 import caffe
 from PIL import Image
 
-def MGN(image_path):
-    # image = caffe.io.load_image(image_path)
-    
+def MGN(image_path):    
     # PIL Image
     image = Image.open(image_path) # RGB
     print(image.size)
@@ -20,27 +18,22 @@ def MGN(image_path):
     image = np.array(image)
     image = image / 255.0
     
-    # (R, G, B), mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]
-    # b = (cv2.split(image)[0] - 0.406) / 0.225 
-    # g = (cv2.split(image)[1] - 0.456) / 0.224
-    # r = (cv2.split(image)[2] - 0.485) / 0.229
-    # image_norm = cv2.merge([b, g, r])
-    
     transformer = caffe.io.Transformer({'blob1': (net.blobs['blob1'].data.shape)}) # (1,3,348,128)
     transformer.set_transpose('blob1', (2, 0, 1))  # python read image format as (h,w,c),-->(c,h,w)
-    # transformer.set_channel_swap('blob1', (2, 1, 0)) # RGB->BGR
 
     transformer_image = transformer.preprocess('blob1', image)
     print(transformer_image.shape)
     net.blobs['blob1'].data[...] = transformer_image
     
     output = net.forward()
-    feat = net.blobs['cat1'].data[0]
-    print(feat, len(feat))
+    batch_norm11 = net.blobs['batch_norm11'].data[0][:]
+    print(batch_norm11)
+    # conv1 = net.blobs['conv1'].data[0]
+    # print(conv1)
 
     
 if __name__ == '__main__':
-    # np.set_printoptions(precision=4, threshold='nan')
+    np.set_printoptions(precision=8, threshold='nan')
 
     # 配置路径
     model_def     = 'MGN.prototxt'
