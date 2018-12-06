@@ -25,7 +25,7 @@
 
 ## 2. 模型训练
 
-### pytorch_MGN
+### --pytorch_MGN
 
 MGN模型的训练，在Pytorch下进行
 
