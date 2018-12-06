@@ -2,30 +2,24 @@
 
 ## 1. 模型转换
 
-### --pytorch2caffe_MGN
+### --[pytorch2caffe_MGN](https://github.com/lwplw/re-id_mgn/tree/master/pytorch2caffe_MGN)
+- [x] 结构文件转换
+- [x] 权重文件转换
+- [x] 预测结果验证
 
-结构文件转换 -- 已完成
+### --[caffe2darknet_MGN](https://github.com/lwplw/re-id_mgn/tree/master/caffe2darknet_MGN)
+- [x] 结构文件转换
+- [x] 权重文件转换
+- [x] 预测结果验证
 
-权重文件转换 -- 已完成
-
-预测结果验证 -- 已完成
-
-### --caffe2darknet_MGN
-
-结构文件转换 -- 已完成
-
-权重文件转换 -- 已完成
-
-预测结果验证 -- 已完成
-
-### --darknet_MGN
+### --[darknet_MGN](https://github.com/lwplw/re-id_mgn/tree/master/darknet_MGN)
 
 修改源码之后的DarkNet
 
 
 ## 2. 模型训练
 
-### --pytorch_MGN
+### --[pytorch_MGN](https://github.com/lwplw/re-id_mgn/tree/master/pytorch_MGN)
 
 MGN模型的训练，在Pytorch下进行
 
