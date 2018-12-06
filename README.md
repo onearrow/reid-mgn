@@ -1,6 +1,6 @@
 # Re-ID MGN模型
 
-## 模型转换
+## 1. 模型转换
 
 ### --pytorch2caffe_MGN
 
@@ -19,7 +19,7 @@
 修改源码之后的DarkNet
 
 
-## 模型训练
+## 2. 模型训练
 
 ### MGN_pytorch
 
