@@ -3,7 +3,7 @@ Reproduction of paper:[Learning Discriminative Features with Multiple Granularit
 
 ## Dependencies
 
-环境配置见requirements.txt文件
+环境配置见`requirements.txt`文件
 
 ## Train
 
@@ -28,3 +28,7 @@ Download model file in [here](https://pan.baidu.com/s/1DbZsT16yIITTkmjRW1ifWQ)
 ## Reference
 
 fork of https://github.com/seathiefwang/MGN-pytorch
+
+## Remark
+
+需要在utils文件夹下新建一个空的`__init__.py`文件
