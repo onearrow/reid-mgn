@@ -1,25 +1,26 @@
 # Re-ID MGN模型
+Reproduction of paper:[Learning Discriminative Features with Multiple Granularities for Person Re-Identification](https://arxiv.org/abs/1804.01438v1)
 
 ## 1. 模型转换
 
-### --[pytorch2caffe_MGN](https://github.com/lwplw/re-id_mgn/tree/master/pytorch2caffe_MGN)
+### -[pytorch2caffe_MGN](https://github.com/lwplw/re-id_mgn/tree/master/pytorch2caffe_MGN)
 - [x] 结构文件转换
 - [x] 权重文件转换
 - [x] 预测结果验证
 
-### --[caffe2darknet_MGN](https://github.com/lwplw/re-id_mgn/tree/master/caffe2darknet_MGN)
+### -[caffe2darknet_MGN](https://github.com/lwplw/re-id_mgn/tree/master/caffe2darknet_MGN)
 - [x] 结构文件转换
 - [x] 权重文件转换
 - [x] 预测结果验证
 
-### --[darknet_MGN](https://github.com/lwplw/re-id_mgn/tree/master/darknet_MGN)
+### -[darknet_MGN](https://github.com/lwplw/re-id_mgn/tree/master/darknet_MGN)
 
 修改源码之后的DarkNet
 
 
 ## 2. 模型训练
 
-### --[pytorch_MGN](https://github.com/lwplw/re-id_mgn/tree/master/pytorch_MGN)
+### -[pytorch_MGN](https://github.com/lwplw/re-id_mgn/tree/master/pytorch_MGN)
 
 MGN模型的训练，在Pytorch下进行
 
