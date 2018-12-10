@@ -23,7 +23,7 @@ run `sh demo.sh`
 | :------: | :------: | :------: | :------: | :------: | :------: |
 |lwp-2018.12.5| 94.18 | 95.87 | 97.48 | 97.98 | 98.43 |
 
-Download model file in [here](https://pan.baidu.com/s/1DbZsT16yIITTkmjRW1ifWQ)
+Download model file in [here](https://drive.google.com/open?id=1gb3iViwOS0dxvjM_X7O1LNafpA2iH9qS)
 
 ## Remark
 
