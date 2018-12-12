@@ -60,3 +60,7 @@
 # 2018.12.10 9:00->17:36, no rerank
 # mAP: 0.8789 rank1: 0.9489 rank3: 0.9739 rank5: 0.9810 rank10: 0.9887 (Best: 0.8789 @epoch 400)
 # CUDA_VISIBLE_DEVICES=0 python main.py --datadir /home/lwp/beednprojects/mgn/Market-1501-v15.09.15/ --batchid 8 --batchtest 16 --test_every 50 --epochs 400 --decay_type step_320_380 --loss 1*CrossEntropy+2*Triplet --margin 1.2 --save lwp-2018.12.7 --nGPU 1 --lr 2e-4 --optimizer ADAM --random_erasing --reset --amsgrad
+
+# 2018.12.11 23:16->?,PReLU
+# CUDA_VISIBLE_DEVICES=0 python main.py --datadir /home/lwp/beednprojects/mgn/Market-1501-v15.09.15/ --batchid 8 --batchtest 16 --test_every 50 --epochs 400 --decay_type step_320_380 --loss 1*CrossEntropy+2*Triplet --margin 1.2 --save lwp-2018.12.11 --nGPU 1 --lr 2e-4 --optimizer ADAM --random_erasing --reset --re_rank --amsgrad
+# mAP: 0.9472 rank1: 0.9614 rank3: 0.9780 rank5: 0.9816 rank10: 0.9875 (Best: 0.9472 @epoch 350)
