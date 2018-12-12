@@ -21,9 +21,10 @@ run `sh demo.sh`
 
 |  | mAP | rank1 | rank3 | rank5 | rank10 |
 | :------: | :------: | :------: | :------: | :------: | :------: |
-|lwp-2018.12.5| 94.18 | 95.87 | 97.48 | 97.98 | 98.43 |
+|lwp-2018.12.05| 94.18 | 95.87 | 97.48 | 97.98 | 98.43 |
+|lwp-2018.12.11| 94.72 | 96.14 | 97.80 | 98.16 | 98.78 |
 
-Download model file in [here](https://drive.google.com/open?id=1gb3iViwOS0dxvjM_X7O1LNafpA2iH9qS)
+Download model file in [here](https://drive.google.com/open?id=1gb3iViwOS0dxvjM_X7O1LNafpA2iH9qS)（lwp-2018.12.05）
 
 ## Remark
 
