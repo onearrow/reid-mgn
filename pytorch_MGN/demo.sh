@@ -49,9 +49,6 @@
 #mAP: 0.9383 rank1: 0.9578 rank3: 0.9721 rank5: 0.9783 rank10: 0.9843 (Best: 0.9383 @epoch 400)
 #python main.py --datadir ../reid-mgn/Market-1501-v15.09.15/ --batchid 16 --batchtest 32 --test_every 50 --epochs 400 --decay_type step_320_380 --loss 1*CrossEntropy+2*Triplet --margin 1.2 --save adam_1 --nGPU 2  --lr 2e-4 --optimizer ADAM --random_erasing --reset --re_rank --amsgrad
 
-# test-lwp
-#CUDA_VISIBLE_DEVICES=0 python main.py --datadir /home/lwp/beednprojects/mgn/Market-1501-v15.09.15/ --margin 1.2 --save sgd_0 --cpu --test_only --resume 0 --pre_train model/model_best.pt
-
 # train-lwp
 # 2018.12.4 11：00->18：30
 # mAP: 0.9418 rank1: 0.9587 rank3: 0.9748 rank5: 0.9798 rank10: 0.9843 (Best: 0.9418 @epoch 400)
