@@ -1,24 +1,24 @@
 # Re-ID MGN模型
 Reproduction of paper:[Learning Discriminative Features with Multiple Granularities for Person Re-Identification](https://arxiv.org/abs/1804.01438v1)
 
-## 1. 模型转换
+## 1. Model conversion
 
 ### -[pytorch2caffe_MGN](https://github.com/lwplw/re-id_mgn/tree/master/pytorch2caffe_MGN)
-- [x] 结构文件转换
-- [x] 权重文件转换
-- [x] 预测结果验证
+- [x] Structure file conversion
+- [x] Weight file conversion
+- [x] Verify prediction results
 
 ### -[caffe2darknet_MGN](https://github.com/lwplw/re-id_mgn/tree/master/caffe2darknet_MGN)
-- [x] 结构文件转换
-- [x] 权重文件转换
-- [x] 预测结果验证
+- [x] Structure file conversion
+- [x] Weight file conversion
+- [x] Verify prediction results
 
 ### -[darknet_MGN](https://github.com/lwplw/re-id_mgn/tree/master/darknet_MGN)
 
 DarkNet after modifying the source code.
 
 
-## 2. 模型训练
+## 2. Model training
 
 ### -[pytorch_MGN](https://github.com/lwplw/re-id_mgn/tree/master/pytorch_MGN)
 
