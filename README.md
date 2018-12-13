@@ -15,14 +15,14 @@ Reproduction of paper:[Learning Discriminative Features with Multiple Granularit
 
 ### -[darknet_MGN](https://github.com/lwplw/re-id_mgn/tree/master/darknet_MGN)
 
-修改源码之后的DarkNet
+DarkNet after modifying the source code.
 
 
 ## 2. 模型训练
 
 ### -[pytorch_MGN](https://github.com/lwplw/re-id_mgn/tree/master/pytorch_MGN)
 
-MGN模型的训练，在Pytorch下进行
+Train the MGN model under Pytorch.
 
 
 ## Remark
