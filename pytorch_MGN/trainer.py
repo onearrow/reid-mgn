@@ -57,7 +57,7 @@ class Trainer():
             end='' if batch+1 != len(self.train_loader) else '\n')
 
         self.loss.end_log(len(self.train_loader))
-
+    
     def test(self):
         epoch = self.scheduler.last_epoch + 1
         self.ckpt.write_log('\n[INFO] Test:')
@@ -66,20 +66,15 @@ class Trainer():
         self.ckpt.add_log(torch.zeros(1, 5))
         qf = self.extract_feature(self.query_loader).numpy()
         gf = self.extract_feature(self.test_loader).numpy()
-
-        if self.args.re_rank:
-            q_g_dist = np.dot(qf, np.transpose(gf))
-            q_q_dist = np.dot(qf, np.transpose(qf))
-            g_g_dist = np.dot(gf, np.transpose(gf))
-            dist = re_ranking(q_g_dist, q_q_dist, g_g_dist)
-        else:
-            dist = cdist(qf, gf)
+        
+        # no rerank
+        dist = cdist(qf, gf)
+        
         r = cmc(dist, self.queryset.ids, self.testset.ids, self.queryset.cameras, self.testset.cameras,
                 separate_camera_set=False,
                 single_gallery_shot=False,
                 first_match_break=True)
         m_ap = mean_ap(dist, self.queryset.ids, self.testset.ids, self.queryset.cameras, self.testset.cameras)
-
         self.ckpt.log[-1, 0] = m_ap
         self.ckpt.log[-1, 1] = r[0]
         self.ckpt.log[-1, 2] = r[2]
@@ -87,13 +82,41 @@ class Trainer():
         self.ckpt.log[-1, 4] = r[9]
         best = self.ckpt.log.max(0)
         self.ckpt.write_log(
-            '[INFO] mAP: {:.4f} rank1: {:.4f} rank3: {:.4f} rank5: {:.4f} rank10: {:.4f} (Best: {:.4f} @epoch {})'.format(
+            '[INFO]( ^_^ )  mAP: {:.4f} rank1: {:.4f} rank3: {:.4f} rank5: {:.4f} rank10: {:.4f} (Best: {:.4f} @epoch {})'.format(
             m_ap,
             r[0], r[2], r[4], r[9],
             best[0][0],
             (best[1][0] + 1)*self.args.test_every
             )
         )
+        
+        # rerank
+        if self.args.re_rank:
+            q_g_dist = np.dot(qf, np.transpose(gf))
+            q_q_dist = np.dot(qf, np.transpose(qf))
+            g_g_dist = np.dot(gf, np.transpose(gf))
+            dist_rerank = re_ranking(q_g_dist, q_q_dist, g_g_dist)
+            
+        r_rerank = cmc(dist_rerank, self.queryset.ids, self.testset.ids, self.queryset.cameras, self.testset.cameras,
+                separate_camera_set=False,
+                single_gallery_shot=False,
+                first_match_break=True)
+        map_rerank = mean_ap(dist_rerank, self.queryset.ids, self.testset.ids, self.queryset.cameras, self.testset.cameras)
+        self.ckpt.log[-1, 0] = map_rerank
+        self.ckpt.log[-1, 1] = r_rerank[0]
+        self.ckpt.log[-1, 2] = r_rerank[2]
+        self.ckpt.log[-1, 3] = r_rerank[4]
+        self.ckpt.log[-1, 4] = r_rerank[9]
+        best = self.ckpt.log.max(0)
+        self.ckpt.write_log(
+            '[INFO](rerank) mAP: {:.4f} rank1: {:.4f} rank3: {:.4f} rank5: {:.4f} rank10: {:.4f} (Best: {:.4f} @epoch {})'.format(
+            map_rerank,
+            r_rerank[0], r_rerank[2], r_rerank[4], r_rerank[9],
+            best[0][0],
+            (best[1][0] + 1)*self.args.test_every
+            )
+        )
+    
         if not self.args.test_only:
             self.ckpt.save(self, epoch, is_best=((best[1][0] + 1)*self.args.test_every == epoch))
 
