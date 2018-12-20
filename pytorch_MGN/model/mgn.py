@@ -53,7 +53,7 @@ class MGN(nn.Module):
         self.maxpool_zp2 = pool2d(kernel_size=(12, 8))
         self.maxpool_zp3 = pool2d(kernel_size=(8, 8))
 
-        reduction = nn.Sequential(nn.Conv2d(2048, args.feats, 1, bias=False), nn.BatchNorm2d(args.feats), nn.ReLU())
+        reduction = nn.Sequential(nn.Conv2d(2048, args.feats, 1, bias=False), nn.BatchNorm2d(args.feats), nn.PReLU(256, 0.25))
 
         self._init_reduction(reduction)
         self.reduction_0 = copy.deepcopy(reduction)
