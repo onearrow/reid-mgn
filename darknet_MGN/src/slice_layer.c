@@ -6,7 +6,8 @@
 
 // slice层的功能：根据给定的参数将bottom分解成多个top
 // axis--要进行分解的维度
-// slice_point--作用是将axis按照slic_point进行分解,slice_point没有设置时对axis均匀分解
+// slice_num--切几刀
+// slice_pos--切出来的第几块
 layer make_slice_layer(int batch, int w, int h, int c, int slice_axis, int slice_num, int slice_pos)
 {
     layer l = {0};
