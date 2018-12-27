@@ -1,4 +1,4 @@
-# Re-ID MGN模型 Pytorch框架下的训练
+# Re-ID MGN模型训练（Pytorch框架）
 Reproduction of paper:[Learning Discriminative Features with Multiple Granularities for Person Re-Identification](https://arxiv.org/abs/1804.01438v1)
 
 ## Dependencies
@@ -27,7 +27,7 @@ run `sh demo.sh`
 |2018.12.11| 94.72 | 96.14 | 97.80 | 98.16 | 98.78 |
 |2018.12.12| 94.68 | 96.26 | 97.57 | 97.89 | 98.60 |
 
-Download model file in [here](https://drive.google.com/open?id=1gb3iViwOS0dxvjM_X7O1LNafpA2iH9qS)（lwp-2018.12.11）
+Download model file in [here](https://drive.google.com/open?id=1OG37yTbLVgPMi1N1aDySyhJMp5kWMHBm)（lwp-2018.12.11）
 
 ## Reference
 
