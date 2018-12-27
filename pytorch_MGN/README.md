@@ -5,6 +5,8 @@ Reproduction of paper:[Learning Discriminative Features with Multiple Granularit
 
 环境配置见`requirements.txt`文件
 
+另，在utils文件夹下新建一个空的`__init__.py`文件
+
 ## Train
 
 ### Prepare training data
@@ -25,10 +27,6 @@ run `sh demo.sh`
 |lwp-2018.12.11| 94.72 | 96.14 | 97.80 | 98.16 | 98.78 |
 
 Download model file in [here](https://drive.google.com/open?id=1gb3iViwOS0dxvjM_X7O1LNafpA2iH9qS)（lwp-2018.12.05）
-
-## Remark
-
-需要在utils文件夹下新建一个空的`__init__.py`文件
 
 ## Reference
 
