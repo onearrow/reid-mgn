@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import os
 import torch
 import numpy as np
@@ -67,14 +70,20 @@ class Trainer():
         qf = self.extract_feature(self.query_loader).numpy()
         gf = self.extract_feature(self.test_loader).numpy()
         
-        # no rerank
-        dist = cdist(qf, gf)
+        # distence threshold
+        norms_q = np.linalg.norm(qf, axis=1)
+        norms_g = np.linalg.norm(gf, axis=1)
+        qf = qf/np.reshape(norms_q, ((qf.shape)[0], 1))
+        gf = gf/np.reshape(norms_g, ((gf.shape)[0], 1))
         
+        # no rerank
+        dist = cdist(qf, gf) # 计算两个矩阵行间的所有向量对的距离,默认：euclidean; 3368*15913
+        
+        m_ap = mean_ap(dist, self.queryset.ids, self.testset.ids, self.queryset.cameras, self.testset.cameras)
         r = cmc(dist, self.queryset.ids, self.testset.ids, self.queryset.cameras, self.testset.cameras,
                 separate_camera_set=False,
                 single_gallery_shot=False,
                 first_match_break=True)
-        m_ap = mean_ap(dist, self.queryset.ids, self.testset.ids, self.queryset.cameras, self.testset.cameras)
         self.ckpt.log[-1, 0] = m_ap
         self.ckpt.log[-1, 1] = r[0]
         self.ckpt.log[-1, 2] = r[2]
