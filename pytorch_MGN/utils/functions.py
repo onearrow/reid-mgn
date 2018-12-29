@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from collections import defaultdict
 import numpy as np
 import torch
@@ -95,19 +98,49 @@ def mean_ap(distmat, query_ids=None, gallery_ids=None,
     query_cams = np.asarray(query_cams)
     gallery_cams = np.asarray(gallery_cams)
     # Sort and find correct matches
-    indices = np.argsort(distmat, axis=1)
-    matches = (gallery_ids[indices] == query_ids[:, np.newaxis])
+    indices = np.argsort(distmat, axis=1) # distmat:3368*15913,按行从小到大排序（即对每个id的特征距离排序）,返回排序后的索引,索引对应的实质上是gallery中图片的位置
+    matches = (gallery_ids[indices] == query_ids[:, np.newaxis]) # gallery按特征距离排序后和query进行id匹配，得到真实label(还未清除同id同相机的情况)
     # Compute AP for each query
     aps = []
-    for i in range(m):
-        # Filter out the same id and same camera
-        valid = ((gallery_ids[indices[i]] != query_ids[i]) |
-                 (gallery_cams[indices[i]] != query_cams[i]))
-        y_true = matches[i, valid]
-        y_score = -distmat[i][indices[i]][valid]
-        if not np.any(y_true):
-            continue
-        aps.append(average_precision_score(y_true, y_score))
+    
+    # distence threshold
+    t_list = [10, 7, 5, 3, 1]
+    for k in range(len(t_list)):
+        top = t_list[k]
+        precision = []
+        score = []
+
+        # print "m, n:", m, n # 3368, 15913
+        for i in range(m):
+            # print "i:", i
+            # Filter out the same id and same camera
+            # 过滤掉同id同相机的filter,
+            valid = ((gallery_ids[indices[i]] != query_ids[i]) |
+                     (gallery_cams[indices[i]] != query_cams[i]))
+            
+            y_true = matches[i, valid] # [ True  True  True ... False False False] 15913->15905,过滤后的真实label
+            y_score = -distmat[i][indices[i]][valid] # [-0.60560741 -0.63570677 -0.63673882...-1.47429787 -1.48229123 -1.48770559] 15905
+            
+            if not np.any(y_true):
+                continue
+            if not aps:
+                aps.append(average_precision_score(y_true, y_score)) # y_true:真实标签,y_score:预测标签
+
+            # distence threshold
+            t = y_true[0:top]
+            s = y_score[0:top]
+            precision.append(np.sum(t==True)/len(t))
+            score.append(s[-1])
+        
+        # distence threshold
+        # print "top-", top
+        # print "precision:", np.mean(precision)
+        # print "distence threshold:", np.mean(score)
+        # print "aps:", np.mean(aps)
+        # print "---------------------------"
+
     if len(aps) == 0:
         raise RuntimeError("No valid query")
+
+
     return np.mean(aps)
