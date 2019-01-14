@@ -122,8 +122,8 @@ def mean_ap(distmat, query_ids=None, gallery_ids=None,
             
             if not np.any(y_true):
                 continue
-            if not aps:
-                aps.append(average_precision_score(y_true, y_score)) # y_true:真实标签,y_score:预测标签
+            if k==0:
+                aps.append(average_precision_score(y_true, y_score))
 
             # distence threshold
             t = y_true[0:top]
@@ -134,7 +134,7 @@ def mean_ap(distmat, query_ids=None, gallery_ids=None,
         # distence threshold
         # print "top-", top
         # print "precision:", np.mean(precision)
-        # print "distence threshold:", np.mean(score)
+        # print "distence threshold:", -np.mean(score)
         # print "---------------------------"
 
     if len(aps) == 0:
