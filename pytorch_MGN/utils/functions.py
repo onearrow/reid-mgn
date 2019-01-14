@@ -114,7 +114,6 @@ def mean_ap(distmat, query_ids=None, gallery_ids=None,
         for i in range(m):
             # print "i:", i
             # Filter out the same id and same camera
-            # 过滤掉同id同相机的filter,
             valid = ((gallery_ids[indices[i]] != query_ids[i]) |
                      (gallery_cams[indices[i]] != query_cams[i]))
             
@@ -136,11 +135,9 @@ def mean_ap(distmat, query_ids=None, gallery_ids=None,
         # print "top-", top
         # print "precision:", np.mean(precision)
         # print "distence threshold:", np.mean(score)
-        # print "aps:", np.mean(aps)
         # print "---------------------------"
 
     if len(aps) == 0:
         raise RuntimeError("No valid query")
-
 
     return np.mean(aps)
