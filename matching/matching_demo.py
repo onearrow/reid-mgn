@@ -140,4 +140,4 @@ if __name__ == "__main__":
         with open("image_mat.json","r") as f2:
             image_data = json.load(f2)
 
-        Counting(feature_data, image_data, threshold)
+        Matching(feature_data, image_data, threshold)
