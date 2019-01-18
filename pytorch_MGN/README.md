@@ -22,7 +22,7 @@ run `sh demo.sh`
 ##  Result
 ![image](https://github.com/lwplw/repository_image/blob/master/%E9%80%89%E5%8C%BA_170.png)
 
-Download model file in [here](https://drive.google.com/open?id=1OG37yTbLVgPMi1N1aDySyhJMp5kWMHBm)（MGN_12_11）
+Download model file in [here](https://drive.google.com/open?id=1OG37yTbLVgPMi1N1aDySyhJMp5kWMHBm)（MGN_12_11_M）
 
 ## Experiment
 
