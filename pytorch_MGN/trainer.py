@@ -70,12 +70,6 @@ class Trainer():
         qf = self.extract_feature(self.query_loader).numpy()
         gf = self.extract_feature(self.test_loader).numpy()
         
-        # distence threshold
-        norms_q = np.linalg.norm(qf, axis=1) # axis=1, l1范数
-        norms_g = np.linalg.norm(gf, axis=1)
-        qf = qf/np.reshape(norms_q, ((qf.shape)[0], 1))
-        gf = gf/np.reshape(norms_g, ((gf.shape)[0], 1))
-        
         # no rerank
         dist = cdist(qf, gf) # metric='cosine'，计算两个矩阵行间的所有向量对的距离,默认：euclidean; 3368*15913
         
