@@ -21,9 +21,6 @@ import mgn
 
 
 def Savefile(img_name, fea, i, id):
-    if os.path.exists("result"):
-        shutil.rmtree("result")
-
     id_path = "result"+"/%d" %(id)
     feature_name = "%d.json" %(i)
 
@@ -75,6 +72,9 @@ def Matching(feature_data_path, image_data_path):
     print "image num: %d" % (len(image_data))
     print "feature num: %d" % (len(feature_data))
     
+    if os.path.exists("result"):
+        shutil.rmtree("result")
+
     # matching
     id_base = []
     id_num  = 0
