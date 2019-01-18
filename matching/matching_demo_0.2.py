@@ -93,7 +93,7 @@ def Matching(feature_data_path, image_data_path):
             ID, NEW_ID = Clustering(i, feature, id_base, feature_base)
             if NEW_ID:
                 id_num += 1
-                id_base.append(I                        D)
+                id_base.append(ID)
                 feature_base = np.vstack((feature_base, feature))
                 Savefile(img_name, fea, i, ID)
                 print "i: %d, id num: %d" %(i, id_num)
@@ -170,10 +170,11 @@ if __name__ == "__main__":
     SAVE_FEATURE = False
     COPY_IMAGE   = True
 
-    IMAGE_PATH       = "bounding_box_test"
+    IMAGE_PATH       = "dwell"
+    # IMAGE_PATH       = "bounding_box_test"
     MODEL_PATH       = "model/MGN_01_11_M_H.pt"
-    FEATURE_MAT_PATH = "feature_mat.json"
-    IMAGE_MAT_PATH   = "image_mat.json"
+    FEATURE_MAT_PATH = "feature_mat_dwell.json"
+    IMAGE_MAT_PATH   = "image_mat_dwell.json"
     
     if EXTRACT:
         Generatematfile(MODEL_PATH, IMAGE_PATH)
