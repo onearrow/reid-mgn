@@ -64,9 +64,9 @@ def Clustering(i, feature, id_base, feature_base):
 
 def Matching(feature_data_path, image_data_path):
     # load data
-    with open("feature_mat1.json","r") as f1:
+    with open(feature_data_path,"r") as f1:
         feature_data = json.load(f1)
-    with open("image_mat1.json","r") as f2:
+    with open(image_data_path,"r") as f2:
         image_data = json.load(f2)
 
     print "image num: %d" % (len(image_data))
