@@ -17,6 +17,11 @@ Reproduction of paper:[Learning Discriminative Features with Multiple Granularit
 
 DarkNet after modifying the source code.
 
+#### （1）在caffe2darknet的转换中，slice层由于DarkNet不支持，需要修改DarkNet源码添加新层实现
+
+#### （2）需要修改源码让max_pool层支持多尺度kernel size和stride size
+
+#### （3）修改DarkNet源码，增加了Python接口调用对numpy格式输入的支持
 
 ## 2. Model training
 
@@ -27,15 +32,6 @@ Train the MGN model under Pytorch.
 
 ## 3. Re-id matching module
 ### -[matching](https://github.com/lwplw/re-id_mgn/tree/master/matching)
-
-
-### Remark
-
-(1)在caffe2darknet的转换中，slice层由于DarkNet不支持，需要修改DarkNet源码添加新层实现
-
-(2)需要修改源码让max_pool层支持多尺度kernel size和stride size
-
-(3)修改DarkNet源码，增加了Python接口调用对numpy格式输入的支持
 
 
 ```text
