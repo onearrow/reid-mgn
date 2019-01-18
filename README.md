@@ -25,7 +25,11 @@ DarkNet after modifying the source code.
 Train the MGN model under Pytorch.
 
 
-## Remark
+## 3. Re-id matching module
+### -[matching](https://github.com/lwplw/re-id_mgn/tree/master/matching)
+
+
+### Remark
 
 (1)在caffe2darknet的转换中，slice层由于DarkNet不支持，需要修改DarkNet源码添加新层实现
 
