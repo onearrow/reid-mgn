@@ -17,11 +17,11 @@ Reproduction of paper:[Learning Discriminative Features with Multiple Granularit
 
 DarkNet after modifying the source code.
 
-#### （1）在caffe2darknet的转换中，slice层由于DarkNet不支持，需要修改DarkNet源码添加新层实现
+#### （1）In the caffe2darknet conversion, need to modify the DarkNet source code to add the slice layer.
 
-#### （2）需要修改源码让max_pool层支持多尺度kernel size和stride size
+#### （2）The source code needs to be modified to allow the max_pool layer to support multi-scale kernel size and stride size
 
-#### （3）修改DarkNet源码，增加了Python接口调用对numpy格式输入的支持
+#### （3）Modify DarkNet source code to add support for numpy format for picture input in Python interface.
 
 ## 2. Model training
 
@@ -29,9 +29,12 @@ DarkNet after modifying the source code.
 
 Train the MGN model under Pytorch.
 
-
 ## 3. Re-id matching module
 ### -[matching](https://github.com/lwplw/re-id_mgn/tree/master/matching)
+
+## 4. Re-id attention MGN
+### -[attention_MGN](https://github.com/lwplw/re-id_mgn/tree/master/attention_MGN)
+#### Attempt to add attention module in resnet50 of MGN
 
 
 ```text
