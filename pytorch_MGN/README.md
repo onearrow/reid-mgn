@@ -10,7 +10,7 @@
 
 ### Prepare training data
 
-Download Market1501 training data.[here](http://www.liangzheng.org/Project/project_reid.html)
+Download [Market1501](http://www.liangzheng.org/Project/project_reid.html) training data.
 
 ### Begin to train
 
