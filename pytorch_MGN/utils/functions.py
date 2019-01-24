@@ -103,41 +103,32 @@ def mean_ap(distmat, query_ids=None, gallery_ids=None,
     # Compute AP for each query
     aps = []
     
-    # distence threshold
-    t_list = [10, 7, 5, 3, 1]
-    for k in range(len(t_list)):
-        top = t_list[k]
-        precision = []
-        score = []
-
-        # print "m, n:", m, n # 3368, 15913
-        for i in range(m):
-            # print "i:", i
-            # Filter out the same id and same camera
-            valid = ((gallery_ids[indices[i]] != query_ids[i]) |
-                     (gallery_cams[indices[i]] != query_cams[i]))
-            
-            y_true = matches[i, valid] # [ True  True  True ... False False False] 15913->15905,过滤后的真实label
-            y_score = -distmat[i][indices[i]][valid] # [-0.60560741 -0.63570677 -0.63673882...-1.47429787 -1.48229123 -1.48770559] 15905
-            
-            if not np.any(y_true):
-                continue
-            if k==0:
-                aps.append(average_precision_score(y_true, y_score))
-
-            # distence threshold
-            t = y_true[0:top]
-            s = y_score[0:top]
-            precision.append(np.sum(t==True)/len(t))
-            score.append(s[-1])
+    avg_rank_list = []
+    for i in range(m):
+        # Filter out the same id and same camera
+        valid = ((gallery_ids[indices[i]] != query_ids[i]) |
+                 (gallery_cams[indices[i]] != query_cams[i]))
+        y_true = matches[i, valid] # [ True  True  True ... False False False] 15913->15905,过滤后的真实label
+        y_score = -distmat[i][indices[i]][valid] # 15905
+        if not np.any(y_true):
+            continue
         
-        # distence threshold
-        # print "top-", top
-        # print "precision:", np.mean(precision)
-        # print "distence threshold:", -np.mean(score)
-        # print "---------------------------"
+        # Correct ID average ranking
+#         true_index = []
+#         for k in range(len(y_true)):
+#             if y_true[k]==True:
+#                 true_index.append(k)
+#         print "query id: %d , Correct ID average ranking: %d" %(query_ids[i], int(sum(true_index))/len(true_index))
+#         avg_rank_list.append(int(sum(true_index))/len(true_index))
+
+        aps.append(average_precision_score(y_true, y_score))
+    
+#     plt.xlabel("query index")
+#     plt.ylabel("correct id average ranking")
+#     plt.plot(avg_rank_list)
+#     plt.savefig("test.jpg")
+#     print "Result:%d" %(int(sum(avg_rank_list))/m)
 
     if len(aps) == 0:
         raise RuntimeError("No valid query")
-
     return np.mean(aps)
