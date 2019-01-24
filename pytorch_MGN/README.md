@@ -19,7 +19,10 @@ Modify the demo.sh file and add the Market1501 directory to --datadir
 run `sh demo.sh`
 
 ##  Result
-![image](https://github.com/lwplw/repository_image/blob/master/%E9%80%89%E5%8C%BA_170.png)
+
+In the bounding_box_test of the Market-1501 dataset, there are error labels in the ids (0194, 0196, 0373, 0538, 0574, 1060, 1174, 1366), which fundamentally affects the evaluation of the model performance. Cleaning (others not processed), the test results are shown in the table.
+
+![image](https://github.com/lwplw/repository_image/blob/master/%E9%80%89%E5%8C%BA_175.png)
 
 Download model file in [here](https://drive.google.com/open?id=1SLwyC138S-wcuTBnDhYD_dzKUnqFt3nC)（MGN_12_27_M）
 
