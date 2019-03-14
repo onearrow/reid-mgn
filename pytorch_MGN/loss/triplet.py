@@ -66,7 +66,7 @@ class TripletLoss(nn.Module):
     def __init__(self, margin=0.3, mutual_flag = False):
         super(TripletLoss, self).__init__()
         self.margin = margin
-        self.ranking_loss = nn.MarginRankingLoss(margin=margin) # 获得一个简单的距离triplet函数
+        self.ranking_loss = nn.MarginRankingLoss(margin=margin) # 评价相似度的损失，loss(x1,x2,y)=max(0,−y∗(x1−x2)+margin)，三个都是标量，y只能取1或-1，取1时表示x1比x2大；反之x2大。参数margin表示两个向量至少要相聚margin的大小，否则loss非负。默认margin取0。
         self.mutual = mutual_flag
 
     def forward(self, inputs, targets):
