@@ -4,14 +4,8 @@ Reproduction of paper:[Learning Discriminative Features with Multiple Granularit
 ## 1. Model conversion
 
 ### -[pytorch2caffe_MGN](https://github.com/lwplw/re-id_mgn/tree/master/pytorch2caffe_MGN)
-- [x] Structure file conversion
-- [x] Weight file conversion
-- [x] Verify prediction results
 
 ### -[caffe2darknet_MGN](https://github.com/lwplw/re-id_mgn/tree/master/caffe2darknet_MGN)
-- [x] Structure file conversion
-- [x] Weight file conversion
-- [x] Verify prediction results
 
 ### -[darknet_MGN](https://github.com/lwplw/re-id_mgn/tree/master/darknet_MGN)
 
