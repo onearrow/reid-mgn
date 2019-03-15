@@ -11,9 +11,11 @@ Reproduction of paper:[Learning Discriminative Features with Multiple Granularit
 
 DarkNet after modifying the source code.
 
-#### （1）In the caffe2darknet conversion, need to modify the DarkNet source code to add the slice layer.
-#### （2）The source code needs to be modified to allow the max_pool layer to support multi-scale kernel size and stride size
-#### （3）Modify DarkNet source code to add support for numpy format for picture input in Python interface.
+（1）In the caffe2darknet conversion, need to modify the DarkNet source code to add the slice layer.
+
+（2）The source code needs to be modified to allow the max_pool layer to support multi-scale kernel size and stride size
+
+（3）Modify DarkNet source code to add support for numpy format for picture input in Python interface.
 
 ## 2. Model training and testing
 ### -[pytorch_MGN](https://github.com/lwplw/re-id_mgn/tree/master/pytorch_MGN)
