@@ -22,7 +22,7 @@ run `sh demo.sh`
 
 In the bounding_box_test of the Market-1501 dataset, there are error labels in the ids (0194, 0196, 0373, 0538, 0574, 1060, 1174, 1366), which fundamentally affects the evaluation of the model performance, The number of images in bounding_box_test has been reduced from 19,732 to 19,698. Cleaning (others not processed), the test results are shown in the table.
 
-In the bounding_box_train of the Market-1501 dataset, there are also some mislabelings, which are misleading to the training of the model. The relevant samples are cleaned to obtain Market-1501(C). The MGN_01_11_M_C model and the MGN_01_15_M_C_H model in the table use Market- 1501 (C) data set training, you can see a significant improvement in model performance.
+In the bounding_box_train of the Market-1501 dataset, there are also some mislabelings, which are misleading to the training of the model. The relevant samples are cleaned to obtain Market-1501(C).
 
 Download model file in [here](https://drive.google.com/open?id=1SLwyC138S-wcuTBnDhYD_dzKUnqFt3nC)（MGN_12_27_M）
 
