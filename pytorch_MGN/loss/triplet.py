@@ -66,7 +66,7 @@ class TripletLoss(nn.Module):
     def __init__(self, margin=0.3, mutual_flag = False):
         super(TripletLoss, self).__init__()
         self.margin = margin
-        self.ranking_loss = nn.MarginRankingLoss(margin=margin) # 计算两个向量之间的相似度,当两个向量之间的距离大于margin,则loss为正,小于时为0。loss(x,y)=max(0,−y∗(x1−x2)+margin)。计算输入x1,x2(2个1D张量)与y的损失。
+        self.ranking_loss = nn.MarginRankingLoss(margin=margin) # 计算两个向量之间的相似度,当两个向量之间的距离大于margin,则loss为正,小于时为0。在一个mini-batch中,loss(x,y)=max(0,−y∗(x1−x2)+margin)。计算输入x1,x2(2个1D张量)与y的损失。
         self.mutual = mutual_flag
 
     def forward(self, inputs, targets):
@@ -78,21 +78,21 @@ class TripletLoss(nn.Module):
         n = inputs.size(0) # 获取batch_size
         #inputs = 1. * inputs / (torch.norm(inputs, 2, dim=-1, keepdim=True).expand_as(inputs) + 1e-12)
         # Compute pairwise distance, replace by the official when merged
-        dist = torch.pow(inputs, 2).sum(dim=1, keepdim=True).expand(n, n) # 每个数平方后，进行加和（通过keepdim保持2维），再扩展成nxn维
+        dist = torch.pow(inputs, 2).sum(dim=1, keepdim=True).expand(n, n) # 每个数平方后,进行加和(通过keepdim保持2维),再扩展成nxn维
         dist = dist + dist.t() # 这样每个dis[i][j]代表的是第i个特征与第j个特征的平方的和
-        dist.addmm_(1, -2, inputs, inputs.t()) # 然后减去2倍的第i个特征*第j个特征，从而通过完全平方式得到(a-b)^2
+        dist.addmm_(1, -2, inputs, inputs.t()) # 然后减去2倍的第i个特征*第j个特征,从而通过完全平方式得到(a-b)^2
         dist = dist.clamp(min=1e-12).sqrt()  # for numerical stability # 然后开方
         # For each anchor, find the hardest positive and negative
-        mask = targets.expand(n, n).eq(targets.expand(n, n).t()) # 这里dist[i][j] = 1代表i和j的label相同， =0代表i和j的label不相同
+        mask = targets.expand(n, n).eq(targets.expand(n, n).t()) # 这里dist[i][j],=1代表i和j的label相同,=0代表i和j的label不相同
         dist_ap, dist_an = [], []
         for i in range(n):
-            dist_ap.append(dist[i][mask[i]].max().unsqueeze(0)) # 在i与所有有相同label的j的距离中找一个最大的
-            dist_an.append(dist[i][mask[i] == 0].min().unsqueeze(0)) # 在i与所有不同label的j的距离找一个最小的
+            dist_ap.append(dist[i][mask[i]].max().unsqueeze(0)) # 在i与所有有相同label的j的距离中找一个最大的,同id但最不像的
+            dist_an.append(dist[i][mask[i] == 0].min().unsqueeze(0)) # 在i与所有不同label的j的距离找一个最小的,不同id但最像的
         dist_ap = torch.cat(dist_ap) # 将list里的tensor拼接成新的tensor
         dist_an = torch.cat(dist_an)
         # Compute ranking hinge loss
-        y = torch.ones_like(dist_an) # 声明一个与dist_an相同shape的全1的tensor，y为1或-1，取1时，x1>x2
-        loss = self.ranking_loss(dist_an, dist_ap, y)
+        y = torch.ones_like(dist_an) # 声明一个与dist_an相同shape的全1的tensor,y为1或-1,取1时,x1>x2
+        loss = self.ranking_loss(dist_an, dist_ap, y) # y的作用更像是一个标志位
         if self.mutual:
             return loss, dist
         return loss
