@@ -66,7 +66,7 @@ class TripletLoss(nn.Module):
     def __init__(self, margin=0.3, mutual_flag = False):
         super(TripletLoss, self).__init__()
         self.margin = margin
-        self.ranking_loss = nn.MarginRankingLoss(margin=margin) # 评价相似度的损失，loss(x1,x2,y)=max(0,−y∗(x1−x2)+margin)，三个都是标量，y只能取1或-1，取1时表示x1比x2大；反之x2大。参数margin表示两个向量至少要相聚margin的大小，否则loss非负。默认margin取0。
+        self.ranking_loss = nn.MarginRankingLoss(margin=margin) # 计算两个向量之间的相似度,当两个向量之间的距离大于margin,则loss为正,小于时为0。loss(x,y)=max(0,−y∗(x1−x2)+margin)。计算输入x1,x2(2个1D张量)与y的损失。
         self.mutual = mutual_flag
 
     def forward(self, inputs, targets):
@@ -91,7 +91,7 @@ class TripletLoss(nn.Module):
         dist_ap = torch.cat(dist_ap) # 将list里的tensor拼接成新的tensor
         dist_an = torch.cat(dist_an)
         # Compute ranking hinge loss
-        y = torch.ones_like(dist_an) # 声明一个与dist_an相同shape的全1的tensor
+        y = torch.ones_like(dist_an) # 声明一个与dist_an相同shape的全1的tensor，y为1或-1，取1时，x1>x2
         loss = self.ranking_loss(dist_an, dist_ap, y)
         if self.mutual:
             return loss, dist
