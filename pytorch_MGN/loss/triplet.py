@@ -85,6 +85,9 @@ class TripletLoss(nn.Module):
         # For each anchor, find the hardest positive and negative
         mask = targets.expand(n, n).eq(targets.expand(n, n).t()) # 这里dist[i][j],=1代表i和j的label相同,=0代表i和j的label不相同
         dist_ap, dist_an = [], []
+        # mini-batch中,每个输入分别作为anchor,找到最远的positive和最近的negative,计算图片的embedding的欧式距离得到
+        # 但embedding是不断在优化更新的,因此上述组合关系也是在不断变化,每次更新都重新选择将影响效率,所以选择每个mini-batch选择一次
+        # 在一个mini-batch中,根据当时的embedding,选择一次三元组,在这些三元组上计算triplet-loss,再对embedding进行更新,不断重复,直到收敛或训练到指定迭代次数
         for i in range(n):
             dist_ap.append(dist[i][mask[i]].max().unsqueeze(0)) # 在i与所有有相同label的j的距离中找一个最大的,同id但最不像的
             dist_an.append(dist[i][mask[i] == 0].min().unsqueeze(0)) # 在i与所有不同label的j的距离找一个最小的,不同id但最像的
