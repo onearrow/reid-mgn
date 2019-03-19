@@ -1,4 +1,4 @@
-# Re-ID MGN模型
+# Re-ID MGN Model
 Reproduction of paper:[Learning Discriminative Features with Multiple Granularities for Person Re-Identification](https://arxiv.org/abs/1804.01438v1)
 
 ## 1. Model conversion
